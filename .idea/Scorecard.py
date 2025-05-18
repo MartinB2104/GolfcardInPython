@@ -1,5 +1,6 @@
 import json
-
+from datetime import datetime
+import os
 
 class Holes:
     scoreToPar = {
@@ -89,6 +90,35 @@ def processPutts(hole):
         except ValueError:
             print("Bitte eine Zahl eingeben.")
 
+def show_saved_rounds():
+    files = [f for f in os.listdir() if f.startswith("runde_") and f.endswith(".json")]
+
+    if not files:
+        print("Keine gespeicherte Runde gefunden.")
+        return
+
+    print("\nGespeicherte Runde(n):")
+    for idx, file in enumerate(files):
+        print(f"{idx+1}. {file}")
+
+    while True:
+        try:
+            choice = int(input("\nWelche Runde soll angezeigt werden? (Zahl eingeben!): "))
+            if 1 <= choice <= len(files):
+                filename = files[choice-1]
+                with open(filename, "r") as infile:
+                    data = json.load(infile)
+                    print(f"\nInhalt von {filename}:\n")
+                    for hole in data:
+                        print(hole)
+                print()
+                break
+            else:
+                print("Bitte eine Zahl zwischen 1 und", len(files), "eingeben.")
+        except ValueError:
+            print("Bitte eine Zahl eingeben.")
+            continue
+
 def main():
     while True:
         try:
@@ -100,11 +130,12 @@ def main():
             """))
             if menu_nmbr < 1 or menu_nmbr > 4:
                 print("Bitte eine Zahl zwischen 1 und 4 eingeben.")
-            else:
-                break
+                continue  # Eingabe wiederholen
         except ValueError:
             print("Bitte eine Zahl eingeben.")
-            continue
+            continue  # Eingabe wiederholen
+
+        # Nach der Validierung kommen hier die Aktionen:
         if menu_nmbr == 1:
             for hole in holes_list:
                 print(f"--- {hole.name} ---")
@@ -112,30 +143,24 @@ def main():
                 processGreenHit(hole)
                 processPutts(hole)
 
-            # Daten speichern
+            timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+            filename = f"runde_{timestamp}.json"
+
             holes_dict_list = [hole.__dict__ for hole in holes_list]
-            with open("data.json", "w") as outfile:
+            with open(filename, "w") as outfile:
                 json.dump(holes_dict_list, outfile, indent=4)
-            print("Runde gespeichert.\n")
+            print(f"Runde gespeichert unter {filename}.\n")
 
         elif menu_nmbr == 2:
-            try:
-                with open("data.json", "r") as infile:
-                    data = json.load(infile)
-                    for hole_data in data:
-                        print(hole_data)
-            except FileNotFoundError:
-                print("Keine gespeicherte Runde gefunden.\n")
+            show_saved_rounds()
 
         elif menu_nmbr == 3:
             print("Programm wird beendet.")
-            break
+            break  # Hier beenden
 
         elif menu_nmbr == 4:
             print("Noch keine Funktion für Option 4 implementiert.\n")
 
-        else:
-            print("Ungültige Auswahl. Bitte 1–4 eingeben.\n")
     # WICHTIG: Wird nur ausgeführt, wenn das Skript direkt gestartet wird
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()

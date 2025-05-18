@@ -8,8 +8,9 @@
         "made_UpAndDown": false,
         "had_Bunkershot": false,
         "made_Bunkershot": false,
-        "hit_Fairway": false,
-        "hit_Green": false
+        "hit_Fairway": true,
+        "hit_Green": false,
+        "putts": 2
     },
     {
         "name": "Bahn 2",
@@ -21,7 +22,8 @@
         "had_Bunkershot": false,
         "made_Bunkershot": false,
         "hit_Fairway": false,
-        "hit_Green": false
+        "hit_Green": true,
+        "putts": 2
     },
     {
         "name": "Bahn 3",
@@ -32,8 +34,9 @@
         "made_UpAndDown": false,
         "had_Bunkershot": false,
         "made_Bunkershot": false,
-        "hit_Fairway": false,
-        "hit_Green": false
+        "hit_Fairway": true,
+        "hit_Green": true,
+        "putts": 1
     },
     {
         "name": "Bahn 4",
@@ -45,7 +48,8 @@
         "had_Bunkershot": false,
         "made_Bunkershot": false,
         "hit_Fairway": false,
-        "hit_Green": false
+        "hit_Green": false,
+        "putts": 2
     },
     {
         "name": "Bahn 5",
@@ -56,8 +60,9 @@
         "made_UpAndDown": false,
         "had_Bunkershot": false,
         "made_Bunkershot": false,
-        "hit_Fairway": false,
-        "hit_Green": false
+        "hit_Fairway": true,
+        "hit_Green": false,
+        "putts": 1
     },
     {
         "name": "Bahn 6",
@@ -68,8 +73,9 @@
         "made_UpAndDown": false,
         "had_Bunkershot": false,
         "made_Bunkershot": false,
-        "hit_Fairway": false,
-        "hit_Green": false
+        "hit_Fairway": true,
+        "hit_Green": true,
+        "putts": 2
     },
     {
         "name": "Bahn 7",
@@ -80,8 +86,9 @@
         "made_UpAndDown": false,
         "had_Bunkershot": false,
         "made_Bunkershot": false,
-        "hit_Fairway": false,
-        "hit_Green": false
+        "hit_Fairway": true,
+        "hit_Green": true,
+        "putts": 2
     },
     {
         "name": "Bahn 8",
@@ -93,7 +100,8 @@
         "had_Bunkershot": false,
         "made_Bunkershot": false,
         "hit_Fairway": false,
-        "hit_Green": false
+        "hit_Green": true,
+        "putts": 2
     },
     {
         "name": "Bahn 9",
@@ -104,7 +112,8 @@
         "made_UpAndDown": false,
         "had_Bunkershot": false,
         "made_Bunkershot": false,
-        "hit_Fairway": false,
-        "hit_Green": false
+        "hit_Fairway": true,
+        "hit_Green": true,
+        "putts": 2
     }
 ]
