@@ -1,0 +1,110 @@
+[
+    {
+        "name": "Bahn 1",
+        "length": 495,
+        "par": 5,
+        "score": 0,
+        "had_UpAndDown": false,
+        "made_UpAndDown": false,
+        "had_Bunkershot": false,
+        "made_Bunkershot": false,
+        "hit_Fairway": false,
+        "hit_Green": false
+    },
+    {
+        "name": "Bahn 2",
+        "length": 159,
+        "par": 3,
+        "score": 0,
+        "had_UpAndDown": false,
+        "made_UpAndDown": false,
+        "had_Bunkershot": false,
+        "made_Bunkershot": false,
+        "hit_Fairway": false,
+        "hit_Green": false
+    },
+    {
+        "name": "Bahn 3",
+        "length": 363,
+        "par": 4,
+        "score": 0,
+        "had_UpAndDown": false,
+        "made_UpAndDown": false,
+        "had_Bunkershot": false,
+        "made_Bunkershot": false,
+        "hit_Fairway": false,
+        "hit_Green": false
+    },
+    {
+        "name": "Bahn 4",
+        "length": 458,
+        "par": 5,
+        "score": 0,
+        "had_UpAndDown": false,
+        "made_UpAndDown": false,
+        "had_Bunkershot": false,
+        "made_Bunkershot": false,
+        "hit_Fairway": false,
+        "hit_Green": false
+    },
+    {
+        "name": "Bahn 5",
+        "length": 140,
+        "par": 3,
+        "score": 0,
+        "had_UpAndDown": false,
+        "made_UpAndDown": false,
+        "had_Bunkershot": false,
+        "made_Bunkershot": false,
+        "hit_Fairway": false,
+        "hit_Green": false
+    },
+    {
+        "name": "Bahn 6",
+        "length": 455,
+        "par": 5,
+        "score": 0,
+        "had_UpAndDown": false,
+        "made_UpAndDown": false,
+        "had_Bunkershot": false,
+        "made_Bunkershot": false,
+        "hit_Fairway": false,
+        "hit_Green": false
+    },
+    {
+        "name": "Bahn 7",
+        "length": 370,
+        "par": 4,
+        "score": 0,
+        "had_UpAndDown": false,
+        "made_UpAndDown": false,
+        "had_Bunkershot": false,
+        "made_Bunkershot": false,
+        "hit_Fairway": false,
+        "hit_Green": false
+    },
+    {
+        "name": "Bahn 8",
+        "length": 99,
+        "par": 3,
+        "score": 0,
+        "had_UpAndDown": false,
+        "made_UpAndDown": false,
+        "had_Bunkershot": false,
+        "made_Bunkershot": false,
+        "hit_Fairway": false,
+        "hit_Green": false
+    },
+    {
+        "name": "Bahn 9",
+        "length": 360,
+        "par": 4,
+        "score": 0,
+        "had_UpAndDown": false,
+        "made_UpAndDown": false,
+        "had_Bunkershot": false,
+        "made_Bunkershot": false,
+        "hit_Fairway": false,
+        "hit_Green": false
+    }
+]

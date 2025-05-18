@@ -78,6 +78,28 @@ def processGreenHit(hole):
         else:
             print("ungültige Eingabe. Bitte nur True oder False eingeben.")
 
+def processUpAndDown(hole):
+    while True:
+        had_UpAndDown  = input("Hast du ein Up and Down gehabt? (True/False)").strip().lower()
+        if had_UpAndDown == "true":
+            hole.had_UpAndDown = True
+            while True:
+                made_UpAndDown = input("Hast du dein Up and Down gemacht? (True/False)").strip().lower()
+                if made_UpAndDown == "true":
+                    hole.made_UpAndDown = True
+                    break
+                elif made_UpAndDown == "false":
+                    hole.made_UpAndDown = False
+                    break
+                else:
+                    print("ungültige Eingabe. Bitte nur True oder False eingeben.")
+            break
+        elif had_UpAndDown == "false":
+            hole.had_UpAndDown = False
+            break
+        else:
+            print("ungültige Eingabe. Bitte nur True oder False eingeben.")
+
 def processPutts(hole):
     while True:
         try:
@@ -141,6 +163,8 @@ def main():
                 print(f"--- {hole.name} ---")
                 processFairway(hole)
                 processGreenHit(hole)
+                if hole.hit_Green == False:
+                    processUpAndDown(hole)
                 processPutts(hole)
 
             timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
