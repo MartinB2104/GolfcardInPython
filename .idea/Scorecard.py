@@ -1,0 +1,141 @@
+import json
+
+
+class Holes:
+    scoreToPar = {
+        -3: "Albatross",
+        -2: "Eagle",
+        -1: "Birdie",
+        0: "Par",
+        1: "Bogey",
+        2: "Double Bogey",
+        3: "Triple Bogey"
+    }
+
+
+    def __init__(self, name, length, par, score,
+             had_UpAndDown, made_UpAndDown,
+             had_Bunkershot, made_Bunkershot,
+             hit_Fairway, hit_Green):
+        self.name = name
+        self.length = length
+        self.par = par
+        self.score = score
+        self.had_UpAndDown = had_UpAndDown
+        self.made_UpAndDown = made_UpAndDown
+        self.had_Bunkershot = had_Bunkershot
+        self.made_Bunkershot = made_Bunkershot
+        self.hit_Fairway = hit_Fairway
+        self.hit_Green = hit_Green
+
+# Instanzen
+hole_one = Holes("Bahn 1", 495, 5, 0, False, False, False, False, False, False)
+hole_two = Holes("Bahn 2", 159, 3, 0, False, False, False, False, False, False)
+hole_three = Holes("Bahn 3", 363, 4, 0, False, False, False, False, False, False)
+hole_four = Holes("Bahn 4", 458, 5, 0, False, False, False, False, False, False)
+hole_five = Holes("Bahn 5", 140, 3, 0, False, False, False, False, False, False)
+hole_six = Holes("Bahn 6", 455, 5, 0, False, False, False, False, False, False)
+hole_seven = Holes("Bahn 7", 370, 4, 0, False, False, False, False, False, False)
+hole_eight = Holes("Bahn 8", 99, 3, 0, False, False, False, False, False, False)
+hole_nine = Holes("Bahn 9", 360, 4, 0, False, False, False, False, False, False)
+
+# Liste der Instanzen
+holes_list = [
+    hole_one, hole_two, hole_three,
+    hole_four, hole_five, hole_six,
+    hole_seven, hole_eight, hole_nine
+]
+
+# Konvertiere in Dictionaries
+holes_dict_list = [hole.__dict__ for hole in holes_list]
+
+# In Datei schreiben
+with open("data.json", "w") as outfile:
+    json.dump(holes_dict_list, outfile, indent=4)
+
+def processFairway(hole):
+    while True:
+        hit_Fairway = input("Hast du das Fairway getroffen? (True/False)").strip().lower()
+        if hit_Fairway == "true":
+            hole.hit_Fairway = True
+            break
+        elif hit_Fairway == "false":
+            hole.hit_Fairway = False
+            break
+        else:
+            print("ungültige Eingabe. Bitte nur True oder False eingeben.")
+
+def processGreenHit(hole):
+    while True:
+        hit_Green = input("Hast du das Grün in regulation getroffen? (True/False)").strip().lower()
+        if hit_Green == "true":
+            hole.hit_Green = True
+            break
+        elif hit_Green == "false":
+            hole.hit_Green = False
+            break
+        else:
+            print("ungültige Eingabe. Bitte nur True oder False eingeben.")
+
+def processPutts(hole):
+    while True:
+        try:
+            putts = int(input("Wie viele Putts hast du gemacht? (Zahl eingeben!)"))
+            if putts <= 0:
+                print("Bitte eine positive Zahl eingeben.")
+            else:
+                hole.putts = putts
+                break
+        except ValueError:
+            print("Bitte eine Zahl eingeben.")
+
+def main():
+    while True:
+        try:
+            menu_nmbr = int(input("""Was möchtest du tun: 
+            (1) Neue Runde
+            (2) Alte Runde einsehen
+            (3) Beenden
+            (4)
+            """))
+            if menu_nmbr < 1 or menu_nmbr > 4:
+                print("Bitte eine Zahl zwischen 1 und 4 eingeben.")
+            else:
+                break
+        except ValueError:
+            print("Bitte eine Zahl eingeben.")
+            continue
+        if menu_nmbr == 1:
+            for hole in holes_list:
+                print(f"--- {hole.name} ---")
+                processFairway(hole)
+                processGreenHit(hole)
+                processPutts(hole)
+
+            # Daten speichern
+            holes_dict_list = [hole.__dict__ for hole in holes_list]
+            with open("data.json", "w") as outfile:
+                json.dump(holes_dict_list, outfile, indent=4)
+            print("Runde gespeichert.\n")
+
+        elif menu_nmbr == 2:
+            try:
+                with open("data.json", "r") as infile:
+                    data = json.load(infile)
+                    for hole_data in data:
+                        print(hole_data)
+            except FileNotFoundError:
+                print("Keine gespeicherte Runde gefunden.\n")
+
+        elif menu_nmbr == 3:
+            print("Programm wird beendet.")
+            break
+
+        elif menu_nmbr == 4:
+            print("Noch keine Funktion für Option 4 implementiert.\n")
+
+        else:
+            print("Ungültige Auswahl. Bitte 1–4 eingeben.\n")
+    # WICHTIG: Wird nur ausgeführt, wenn das Skript direkt gestartet wird
+    if __name__ == "__main__":
+        main()
