@@ -17,3 +17,15 @@ def show_saved_rounds():
                 print(h)
     except (ValueError, IndexError):
         print("Ungültige Auswahl.")
+
+def display_hole_info(hole, score_bisher):
+    print(f"""--- {hole.name} ---
+    Länge: {hole.length} Meter
+    Par: {hole.par}
+    """)
+    if score_bisher == 0:
+        print("Score bisher: even par")
+    elif score_bisher < 0:
+        print(f"Score bisher: -{score_bisher} Fairway")
+    else:
+        print(f"Score bisher: +{score_bisher} Green")

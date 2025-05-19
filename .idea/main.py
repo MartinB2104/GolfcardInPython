@@ -4,6 +4,8 @@ from core.inputs import *
 from core.file_io import save_round
 from stats.stats import calculate_round_stats
 from ui.display import show_saved_rounds
+from ui.display import display_hole_info
+
 
 def main():
     while True:
@@ -21,14 +23,18 @@ Was möchtest du tun:
 
         if menu == 1:
             holes = get_default_holes()
+            score_bisher = 0
             for hole in holes:
-                print(f"--- {hole.name} ---")
+                display_hole_info(hole, score_bisher);
                 processFairway(hole)
                 processGreenHit(hole)
                 if not hole.hit_Green:
                     processUpAndDown(hole)
                 processPutts(hole)
                 processScore(hole)
+
+                score_bisher += hole.score - hole.par
+
             filename = f"runde_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.json"
             save_round(holes, filename)
             print(f"Runde gespeichert unter {filename}.\n")
@@ -41,6 +47,7 @@ Was möchtest du tun:
             break
         else:
             print("Ungültige Auswahl.")
+
 
 if __name__ == "__main__":
     main()
