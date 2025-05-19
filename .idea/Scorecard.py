@@ -54,6 +54,7 @@ holes_dict_list = [hole.__dict__ for hole in holes_list]
 with open("data.json", "w") as outfile:
     json.dump(holes_dict_list, outfile, indent=4)
 
+
 def processFairway(hole):
     while True:
         hit_Fairway = input("Hast du das Fairway getroffen? (True/False)").strip().lower()
@@ -65,6 +66,7 @@ def processFairway(hole):
             break
         else:
             print("ungültige Eingabe. Bitte nur True oder False eingeben.")
+
 
 def processGreenHit(hole):
     while True:
@@ -78,6 +80,31 @@ def processGreenHit(hole):
         else:
             print("ungültige Eingabe. Bitte nur True oder False eingeben.")
 
+
+def processBunkershot(hole):
+    while True:
+        had_Bunkershot = input("Hattest du ein Bunkerschlag? (True/False)").strip().lower()
+        if had_Bunkershot == "true":
+            hole.had_Bunkershot = True
+            while True:
+                made_Bunkershot = input("Hast du das bunker up and down gemacht? (True/False)").strip().lower()
+                if made_Bunkershot == "true":
+                    hole.made_Bunkershot = True
+                    break
+                elif made_Bunkershot == "false":
+                    hole.made_Bunkershot = False
+                    break
+                else:
+                    print("ungültige Eingabe. Bitte nur True oder False eingeben.")
+            break
+        elif had_Bunkershot == "false":
+            hole.had_Bunkershot = False
+            hole.made_Bunkershot = False
+            break
+        else:
+            print("ungültige Eingabe. Bitte nur True oder False eingeben.")
+
+
 def processUpAndDown(hole):
     while True:
         had_UpAndDown  = input("Hast du ein Up and Down gehabt? (True/False)").strip().lower()
@@ -87,6 +114,7 @@ def processUpAndDown(hole):
                 made_UpAndDown = input("Hast du dein Up and Down gemacht? (True/False)").strip().lower()
                 if made_UpAndDown == "true":
                     hole.made_UpAndDown = True
+                    processBunkershot(hole)
                     break
                 elif made_UpAndDown == "false":
                     hole.made_UpAndDown = False
@@ -100,6 +128,7 @@ def processUpAndDown(hole):
         else:
             print("ungültige Eingabe. Bitte nur True oder False eingeben.")
 
+
 def processPutts(hole):
     while True:
         try:
@@ -111,6 +140,44 @@ def processPutts(hole):
                 break
         except ValueError:
             print("Bitte eine Zahl eingeben.")
+
+
+def processScore(hole):
+    while True:
+        try:
+            score = int(input("Wie war dein score? (Zahl eingeben!)"))
+            if score < 1:
+                print("Bitte eine sinnvolle Zahl eingeben!")
+            else:
+                hole.score = score
+                break
+        except ValueError:
+            print("Bitte eine Zahl eingeben.")
+
+
+def calculate_round_stats():
+    files = [f for f in os.listdir() if f.startswith("runde_") and f.endswith(".json")]
+
+    if not files:
+        print("Keine gespeicherte Runde gefunden.")
+        return
+
+    print("\nGespeicherte Runde(n):")
+    for idx, file in enumerate(files):
+        print(f"{idx+1}. {file}")
+    while True:
+        try:
+            choice = int(input("\nFür welche Runde sollen Statistiken ausgerechnet werden? (Zahl eingeben!): "))
+            if 1 <= choice <= len(files):
+                filename = files[choice-1]
+                with open(filename, "r") as infile:
+                    data = json.load(infile)
+            else:
+                print("Bitte eine Zahl zwischen 1 und", len(files), "eingeben.")
+        except ValueError:
+            print("Bitte eine Zahl eingeben.")
+            continue
+
 
 def show_saved_rounds():
     files = [f for f in os.listdir() if f.startswith("runde_") and f.endswith(".json")]
@@ -147,8 +214,8 @@ def main():
             menu_nmbr = int(input("""Was möchtest du tun: 
             (1) Neue Runde
             (2) Alte Runde einsehen
-            (3) Beenden
-            (4)
+            (3) Statistiken
+            (4) Beenden
             """))
             if menu_nmbr < 1 or menu_nmbr > 4:
                 print("Bitte eine Zahl zwischen 1 und 4 eingeben.")
@@ -166,6 +233,7 @@ def main():
                 if hole.hit_Green == False:
                     processUpAndDown(hole)
                 processPutts(hole)
+                processScore(hole)
 
             timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
             filename = f"runde_{timestamp}.json"
@@ -179,12 +247,16 @@ def main():
             show_saved_rounds()
 
         elif menu_nmbr == 3:
-            print("Programm wird beendet.")
-            break  # Hier beenden
+            stats_nmbr = int(input("""Was möchtest du tun: 
+            (1) alte Rundenstatistik anzeigen
+            """))
+            if stats_nmbr == 1:
+                show_saved_rounds()
+                calculate_round_stats()
 
         elif menu_nmbr == 4:
-            print("Noch keine Funktion für Option 4 implementiert.\n")
-
+            print("Programm wird beendet.")
+        break  # Hier beenden
     # WICHTIG: Wird nur ausgeführt, wenn das Skript direkt gestartet wird
 if __name__ == "__main__":
     main()
