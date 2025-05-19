@@ -26,6 +26,6 @@ def display_hole_info(hole, score_bisher):
     if score_bisher == 0:
         print("Score bisher: even par")
     elif score_bisher < 0:
-        print(f"Score bisher: -{score_bisher} Fairway")
+        print(f"Score bisher: -{score_bisher}")
     else:
-        print(f"Score bisher: +{score_bisher} Green")
+        print(f"Score bisher: +{score_bisher}")
